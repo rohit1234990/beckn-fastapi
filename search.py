@@ -3,10 +3,8 @@ import time
 
 
 def helper_on_search(data):
-    print('sleeping ....')
-    time.sleep(10)
-    print('Do Work Now')
-    url = "https://webhook.site/10c263c9-758f-4926-836c-7100a0849e15"
+    # 5 seconds delay
+    time.sleep(5)
     payload = {
         "context": {
             "domain": "delivery",
@@ -14,8 +12,8 @@ def helper_on_search(data):
             "city": "std:080",
             "action": "on_search",
             "core_version": "0.9.2",
-            "bap_id": "https://mock_bap.com/",
-            "bap_uri": "https://mock_bap.com/beckn/",
+            "bap_id": "https://delivery-fast-api.herokuapp.com/",
+            "bap_uri": "https://delivery-fast-api.herokuapp.com/v1/",
             "transaction_id": "1239890342",
             "message_id": "123793824",
             "timestamp": "2021-03-23T10:00:40.065Z"
@@ -60,9 +58,7 @@ def helper_on_search(data):
         }
     }
 
+    url = data['context']['bap_uri']
     url = f"{url}/on_search"
-    for i in range(5):
-        print('sleeping ....')
-        time.sleep(20)
-        print('Do Work Now')
-        resp = requests.post(url, json=payload)
+    resp = requests.post(url, json=payload)
+    print('response : ', resp)
